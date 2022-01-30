@@ -6,8 +6,7 @@ class Node :
         self.maxHeightNode = None
 
 class BinaryTree :
-    def __init__ ( self ) :
-        self.root = None
+    def __init__ ( self ) : self.root = None
     
     def insert ( self , data ) :
         if self.root == None :
@@ -16,7 +15,6 @@ class BinaryTree :
         
         parent = self.root
         temp = self.root
-        
         while temp :
             parent = temp
             
@@ -26,7 +24,7 @@ class BinaryTree :
         
             if temp.data == data : return # data exists
         
-            if temp.data < data : 
+            elif temp.data < data : 
                 temp = temp.right
                 if temp == None : 
                     parent.right = Node ( data )
@@ -36,8 +34,6 @@ class BinaryTree :
                 if temp == None :
                     parent.left = Node ( data )
                     return
-            else : print ( " something unfathomable happened! " )
-        return
 
     def printList ( self , node ) :
         if node == None : return
@@ -48,8 +44,7 @@ class BinaryTree :
         if node.right : 
             print ( " --- R of" , node.data )
             self.printList ( node.right )
-        if node.maxHeightNode :
-            print ( " --- height of" , node.data , ":" , node.maxHeightNode )
+        if node.maxHeightNode : print ( " --- height of" , node.data , ":" , node.maxHeightNode )
         return
     
     def height ( self , node ) :
@@ -61,13 +56,12 @@ class BinaryTree :
     
     def setMaxHeightNode ( self , node ) :
         if node == None : return { "node" : 0 }
-        if node.data : 
-            x = y = 0
-            if node.left : x += self.height ( node.left )
-            if node.right : y += self.height ( node.right )
-            if x > y : return { "left" : x }
-            if x == y : return { "both" : x }
-            else : return { "right" : y }
+        x = y = 0
+        if node.left : x += self.height ( node.left )
+        if node.right : y += self.height ( node.right )
+        if x > y : return { "left" : x }
+        if x == y : return { "both" : x }
+        else : return { "right" : y }
 
     def diameter ( self ) :
         if self.root == None : return
@@ -96,7 +90,7 @@ class BinaryTree :
         ansLeft = node.maxHeightNode.get ("left")
         ansRight = node.maxHeightNode.get ("right")
         
-        if ansBoth : return ( (ansBoth*2) + 1 )
+        if ansBoth : return ( ( ansBoth * 2 ) + 1 )
         elif ansLeft : return ( ansLeft + self.getDiameter ( node.right ) )
         elif ansRight : return ( ansRight + self.getDiameter ( node.left ) )
         else : return 0
